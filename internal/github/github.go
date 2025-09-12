@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"path"
 	"strings"
-
-	"github.com/cli/go-gh/v2/pkg/api"
 )
+
+// HTTPClient interface for abstraction and testing
+type HTTPClient interface {
+	Get(endpoint string, response interface{}) error
+}
 
 type Release struct {
 	ID          int     `json:"id"`
@@ -29,7 +32,7 @@ type Asset struct {
 	URL                string `json:"url"`
 }
 
-func GetRelease(client *api.RESTClient, repo, tag string) (*Release, error) {
+func GetRelease(client HTTPClient, repo, tag string) (*Release, error) {
 	var endpoint string
 	if tag == "" {
 		endpoint = fmt.Sprintf("repos/%s/releases/latest", repo)
@@ -90,7 +93,7 @@ func ListAssets(assets []Asset, pattern string) error {
 	return nil
 }
 
-func ListReleases(client *api.RESTClient, repo string) error {
+func ListReleases(client HTTPClient, repo string) error {
 	endpoint := fmt.Sprintf("repos/%s/releases", repo)
 
 	var releases []Release
