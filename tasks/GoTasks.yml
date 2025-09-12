@@ -41,6 +41,12 @@ tasks:
     desc: "Format Go code"
     cmd: golangci-lint fmt
 
-  test:
+  test:unit:
     desc: "Run Go tests"
-    cmd: go test ./...
+    cmd: go test ./internal/...
+    aliases:
+      - test
+
+  test:integration:
+    desc: "Run integration tests"
+    cmd: go test ./tests/...
