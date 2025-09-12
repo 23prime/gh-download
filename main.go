@@ -222,8 +222,8 @@ func downloadArchive(client *api.RESTClient, repo, tag, archiveFormat, dir strin
 		return fmt.Errorf("failed to create directory: %w", err)
 	}
 
-	filepath := filepath.Join(dir, filename)
-	file, err := os.Create(filepath)
+	fullPath := filepath.Join(dir, filename)
+	file, err := os.Create(fullPath)
 	if err != nil {
 		return fmt.Errorf("failed to create file: %w", err)
 	}
@@ -238,7 +238,7 @@ func downloadArchive(client *api.RESTClient, repo, tag, archiveFormat, dir strin
 		return fmt.Errorf("failed to write file: %w", err)
 	}
 
-	fmt.Printf("Downloaded archive: %s\n", filepath)
+	fmt.Printf("Downloaded archive: %s\n", fullPath)
 	return nil
 }
 
@@ -370,13 +370,13 @@ func downloadAssets(assets []Asset, dir string) error {
 			return fmt.Errorf("failed to download %s: %w", asset.Name, err)
 		}
 
-		filepath := filepath.Join(dir, asset.Name)
-		file, err := os.Create(filepath)
+		fullPath := filepath.Join(dir, asset.Name)
+		file, err := os.Create(fullPath)
 		if err != nil {
 			if closeErr := resp.Body.Close(); closeErr != nil {
 				fmt.Fprintf(os.Stderr, "Warning: failed to close response body: %v\n", closeErr)
 			}
-			return fmt.Errorf("failed to create file %s: %w", filepath, err)
+			return fmt.Errorf("failed to create file %s: %w", fullPath, err)
 		}
 
 		written, err := io.Copy(file, resp.Body)
@@ -390,7 +390,7 @@ func downloadAssets(assets []Asset, dir string) error {
 		}
 
 		if err != nil {
-			return fmt.Errorf("failed to write %s: %w", filepath, err)
+			return fmt.Errorf("failed to write %s: %w", fullPath, err)
 		}
 
 		fmt.Printf("done (%d bytes)\n", written)
