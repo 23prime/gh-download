@@ -25,4 +25,23 @@
 
   // Dictionary for spell checker
   "cSpell.words": ["shellcheck", "Taskfile"],
+
+  // Go
+  "go.useLanguageServer": true,
+  "go.formatTool": "gofmt",
+  "go.lintTool": "golangci-lint",
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+    },
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "go.enableCodeLens": {
+    "runtest": true,
+  },
+  "go.inferGopath": true,
 }
