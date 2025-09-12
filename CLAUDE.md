@@ -37,6 +37,7 @@ This project uses Taskfile and mise for tooling management:
 ## Architecture
 
 ### Code Structure
+
 - **Main application**: `main.go` - Entry point with minimal logic
 - **Internal packages**: Organized under `internal/` following Go best practices
   - `internal/config/` - CLI argument parsing and configuration
@@ -44,11 +45,13 @@ This project uses Taskfile and mise for tooling management:
   - `internal/download/` - Download functionality for assets and archives
 
 ### Testing Strategy
+
 - **Unit tests**: Mock-based tests in `internal/` packages with 100% coverage for core logic
 - **Integration tests**: End-to-end tests in `tests/` directory that execute the actual CLI with real GitHub API
 - **HTTPClient interface**: Enables comprehensive testing without external dependencies
 
 ### Development Tools
+
 - **GitHub CLI extension**: Uses `github.com/cli/go-gh/v2` for GitHub API integration
 - **Task-based workflow**: All development tasks are managed through Taskfile with modular task files in `tasks/`
 - **Multi-language linting**: Separate linting for YAML, JSON, Markdown, GitHub Actions, and Go
@@ -71,12 +74,14 @@ The project uses mise (mise.toml) to manage these tools:
 ## Testing Guidelines
 
 ### Unit Tests
+
 - Located in `internal/` packages alongside source code
 - Use MockHTTPClient for testing GitHub API interactions
 - Achieve 100% statement coverage for critical functions
 - Focus on pure functions and business logic
 
 ### Integration Tests  
+
 - Located in `tests/integration_test.go`
 - Execute actual CLI commands via `os/exec`
 - Use real GitHub API with stable public repositories (cli/cli)
@@ -85,6 +90,7 @@ The project uses mise (mise.toml) to manage these tools:
 - Slower execution (~13 seconds) due to network operations
 
 ### Test Execution
+
 - **Fast feedback**: `task go:test` runs only unit tests
 - **Full validation**: `task go:test:integration` runs end-to-end tests  
 - **CI/CD**: Only unit tests are included in `task check` for speed
