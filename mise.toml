@@ -13,5 +13,8 @@ biome = "latest"
 actionlint = "latest"
 shellcheck = "latest"
 
+# Go
+go = "1.24"
+
 # Others
 fzf = "latest"
