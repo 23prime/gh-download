@@ -44,3 +44,11 @@ tasks:
       - go:check
     aliases:
       - c
+
+  tag:*:
+    desc: "Create a new tag"
+    vars:
+      VERSION: "{{index .MATCH 0}}"
+    cmds:
+      - git tag -a -m "Release v{{.VERSION}}" v{{.VERSION}}
+      - git push --follow-tags
