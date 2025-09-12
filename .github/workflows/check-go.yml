@@ -1,0 +1,57 @@
+name: Check Go code
+
+on:
+  push:
+    paths:
+      - "**.go"
+      - "go.mod"
+      - "go.sum"
+      - ".golangci.yml"
+      - ".github/workflows/check-go.yml"
+  pull_request:
+    paths:
+      - "**.go"
+      - "go.mod"
+      - "go.sum"
+      - ".golangci.yml"
+      - ".github/workflows/check-go.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install mise and setup Go
+        uses: jdx/mise-action@v3
+        with:
+          install: true
+          install_args: "go golangci-lint"
+          cache: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: task go:install
+
+      - name: Fix
+        run: task go:fix
+
+      - name: Commit and Push
+        uses: 23prime/simple-commit-and-push@v1
+        with:
+          commit-message: "Auto fix code by `task go:fix`"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check
+        run: task go:check
