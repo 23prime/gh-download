@@ -1,0 +1,46 @@
+version: "3"
+
+tasks:
+  install:
+    desc: "Install Go dependencies"
+    cmd: go mod tidy
+
+  run:
+    desc: "Run Go"
+    cmds:
+      - go run ./main.go
+
+  build:
+    desc: "Build Go binary"
+    cmds:
+      - go build .
+
+  check:
+    desc: "Check Go code"
+    cmds:
+      - task: fix
+      - task: lint
+      - task: test
+      - task: build
+
+  fix:
+    desc: "Fix Go code"
+    cmds:
+      - task: fmt
+      - task: lint:fix
+
+  lint:
+    desc: "Lint Go code"
+    cmd: golangci-lint run
+
+  lint:fix:
+    desc: "Lint Go code and auto fix"
+    cmd: golangci-lint run --fix
+
+  fmt:
+    desc: "Format Go code"
+    cmd: golangci-lint fmt
+
+  test:
+    desc: "Run Go tests"
+    cmd: go test ./...

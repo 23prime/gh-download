@@ -6,6 +6,7 @@ includes:
   json: tasks/JsonTasks.yml
   md: tasks/MarkdownTasks.yml
   gh: tasks/GitHubTasks.yml
+  go: tasks/GoTasks.yml
 
 tasks:
   default:
@@ -40,5 +41,6 @@ tasks:
       - json:check
       - md:check
       - gh:check
+      - go:check
     aliases:
       - c
