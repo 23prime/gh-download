@@ -368,24 +368,26 @@ func downloadAssets(client *api.RESTClient, assets []Asset, dir string) error {
 		if err != nil {
 			return fmt.Errorf("failed to download %s: %w", asset.Name, err)
 		}
-		defer func() {
-			if closeErr := resp.Body.Close(); closeErr != nil {
-				fmt.Fprintf(os.Stderr, "Warning: failed to close response body: %v\n", closeErr)
-			}
-		}()
 
 		filepath := filepath.Join(dir, asset.Name)
 		file, err := os.Create(filepath)
 		if err != nil {
+			if closeErr := resp.Body.Close(); closeErr != nil {
+				fmt.Fprintf(os.Stderr, "Warning: failed to close response body: %v\n", closeErr)
+			}
 			return fmt.Errorf("failed to create file %s: %w", filepath, err)
 		}
-		defer func() {
-			if closeErr := file.Close(); closeErr != nil {
-				fmt.Fprintf(os.Stderr, "Warning: failed to close file: %v\n", closeErr)
-			}
-		}()
 
 		written, err := io.Copy(file, resp.Body)
+
+		// Close resources immediately after use
+		if closeErr := file.Close(); closeErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: failed to close file: %v\n", closeErr)
+		}
+		if closeErr := resp.Body.Close(); closeErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: failed to close response body: %v\n", closeErr)
+		}
+
 		if err != nil {
 			return fmt.Errorf("failed to write %s: %w", filepath, err)
 		}
