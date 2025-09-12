@@ -300,7 +300,7 @@ func TestFilterAssets_InvalidPattern(t *testing.T) {
 	if err == nil {
 		t.Fatal("Expected error for invalid pattern, got nil")
 	}
-	
+
 	expectedError := "invalid pattern '['"
 	if !strings.Contains(err.Error(), expectedError) {
 		t.Errorf("Expected error to contain %q, got %q", expectedError, err.Error())
