@@ -6,6 +6,9 @@ linters:
     - govet
     - staticcheck
     - errcheck
+    - unparam
+    - unused
+    - ineffassign
   exclusions:
     rules:
       - path: _test\.go
