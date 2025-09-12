@@ -168,7 +168,7 @@ func downloadFromRelease(config Config) error {
 		fmt.Printf("  - %s (%d bytes)\n", asset.Name, asset.Size)
 	}
 
-	return downloadAssets(client, matchingAssets, config.Directory)
+	return downloadAssets(matchingAssets, config.Directory)
 }
 
 func getRelease(client *api.RESTClient, repo, tag string) (*Release, error) {
@@ -348,21 +348,22 @@ func formatDate(dateStr string) string {
 	return dateStr
 }
 
-func downloadAssets(client *api.RESTClient, assets []Asset, dir string) error {
+func downloadAssets(assets []Asset, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return fmt.Errorf("failed to create directory: %w", err)
 	}
 
+	// Create download client once with octet-stream header
+	opts := api.ClientOptions{
+		Headers: map[string]string{"Accept": "application/octet-stream"},
+	}
+	downloadClient, err := api.NewRESTClient(opts)
+	if err != nil {
+		return fmt.Errorf("failed to create download client: %w", err)
+	}
+
 	for _, asset := range assets {
 		fmt.Printf("Downloading %s... ", asset.Name)
-
-		opts := api.ClientOptions{
-			Headers: map[string]string{"Accept": "application/octet-stream"},
-		}
-		downloadClient, err := api.NewRESTClient(opts)
-		if err != nil {
-			return fmt.Errorf("failed to create download client: %w", err)
-		}
 
 		resp, err := downloadClient.Request("GET", asset.URL, nil)
 		if err != nil {
