@@ -123,9 +123,9 @@ func TestIntegration_ArchiveDownload(t *testing.T) {
 
 	tempDir := createTempDir(t)
 
-	stdout, stderr, exitCode := runGhDownload(t, 
-		"--repo", "cli/cli", 
-		"--archive", "zip", 
+	stdout, stderr, exitCode := runGhDownload(t,
+		"--repo", "cli/cli",
+		"--archive", "zip",
 		"--dir", tempDir)
 
 	if exitCode != 0 {
@@ -163,8 +163,8 @@ func TestIntegration_AssetDownload_WithPattern(t *testing.T) {
 	tempDir := createTempDir(t)
 
 	// Try to download tar.gz assets (common in cli/cli releases)
-	stdout, stderr, exitCode := runGhDownload(t, 
-		"--repo", "cli/cli", 
+	stdout, stderr, exitCode := runGhDownload(t,
+		"--repo", "cli/cli",
 		"--pattern", "*.tar.gz",
 		"--dir", tempDir)
 
@@ -218,8 +218,8 @@ func TestIntegration_SpecificTag(t *testing.T) {
 	}
 
 	// Use a known stable tag from cli/cli
-	stdout, stderr, exitCode := runGhDownload(t, 
-		"--repo", "cli/cli", 
+	stdout, stderr, exitCode := runGhDownload(t,
+		"--repo", "cli/cli",
 		"--tag", "v2.0.0",
 		"--list")
 
