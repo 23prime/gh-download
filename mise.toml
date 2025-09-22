@@ -17,5 +17,5 @@ shellcheck = "latest"
 go = "1.24"
 golangci-lint = "2"
 
-# Others
+# Other tools
 fzf = "latest"
