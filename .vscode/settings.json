@@ -30,7 +30,6 @@
   },
 
   // Dictionary for spell checker
-<<<<<<< HEAD
   "cSpell.words": ["shellcheck", "Taskfile"],
 
   // Go
@@ -40,18 +39,15 @@
   "[go]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always",
+      "source.organizeImports": "always"
     },
     "editor.insertSpaces": false,
     "editor.tabSize": 4,
-    "editor.detectIndentation": false,
+    "editor.detectIndentation": false
   },
   "go.toolsManagement.autoUpdate": true,
   "go.enableCodeLens": {
-    "runtest": true,
+    "runtest": true
   },
-  "go.inferGopath": true,
-=======
-  "cSpell.words": ["shellcheck", "Taskfile"]
->>>>>>> upstream/main
+  "go.inferGopath": true
 }
