@@ -30,6 +30,7 @@
   },
 
   // Dictionary for spell checker
+<<<<<<< HEAD
   "cSpell.words": ["shellcheck", "Taskfile"],
 
   // Go
@@ -50,4 +51,7 @@
     "runtest": true
   },
   "go.inferGopath": true
+=======
+  "cSpell.words": ["shellcheck", "Taskfile"]
+>>>>>>> upstream/main
 }
