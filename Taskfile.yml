@@ -45,6 +45,7 @@ tasks:
     aliases:
       - c
 
+<<<<<<< HEAD
   tag:*:
     desc: "Create a new tag"
     vars:
@@ -52,3 +53,14 @@ tasks:
     cmds:
       - git tag -a -m "Release v{{.VERSION}}" v{{.VERSION}}
       - git push --follow-tags
+=======
+  fix-and-check:
+    desc: "Fix and check"
+    deps:
+      - yml:check
+      - json:fix-and-check
+      - md:fix-and-check
+      - gh:check
+    aliases:
+      - fc
+>>>>>>> upstream/main
