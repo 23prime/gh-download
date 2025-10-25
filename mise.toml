@@ -19,3 +19,4 @@ golangci-lint = "2"
 
 # Other tools
 fzf = "latest"
+lefthook = "latest"
