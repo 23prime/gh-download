@@ -15,19 +15,26 @@ tasks:
     cmds:
       - go build .
 
-  check:
-    desc: "Check Go code"
+  fix-and-check:
+    desc: "Fix and check Go code"
     cmds:
       - task: fix
-      - task: lint
-      - task: test
-      - task: build
+      - task: check
+  aliases:
+    - fc
 
   fix:
     desc: "Fix Go code"
     cmds:
       - task: fmt
       - task: lint:fix
+
+  check:
+    desc: "Check Go code"
+    cmds:
+      - task: lint
+      - task: test
+      - task: build
 
   lint:
     desc: "Lint Go code"

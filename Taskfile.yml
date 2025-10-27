@@ -45,6 +45,17 @@ tasks:
     aliases:
       - c
 
+  fix-and-check:
+    desc: "Fix and check"
+    deps:
+      - yml:check
+      - json:fix-and-check
+      - md:fix-and-check
+      - gh:check
+      - go:fix-and-check
+    aliases:
+      - fc
+
   tag:*:
     desc: "Create a new tag"
     vars:
