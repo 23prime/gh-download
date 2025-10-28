@@ -52,6 +52,7 @@ tasks:
       - json:fix-and-check
       - md:fix-and-check
       - gh:check
+<<<<<<< HEAD
       - go:fix-and-check
     aliases:
       - fc
@@ -63,3 +64,7 @@ tasks:
     cmds:
       - git tag -a -m "Release v{{.VERSION}}" v{{.VERSION}}
       - git push --follow-tags
+=======
+    aliases:
+      - fc
+>>>>>>> upstream/main
