@@ -24,8 +24,16 @@ tasks:
     desc: "Setup project"
     cmds:
       - task: mise:setup
+      - task: yml:setup
     aliases:
       - s
+
+  update:
+    desc: "Update project dependencies"
+    cmds:
+      - task: mise:update
+    aliases:
+      - u
 
   check:
     desc: "Check"
